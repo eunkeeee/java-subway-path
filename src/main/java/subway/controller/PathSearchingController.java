@@ -16,7 +16,6 @@ public class PathSearchingController implements Controllable {
     private final InputView inputView;
     private final OutputView outputView;
     private final Map<Status, Supplier<Status>> controllerGuide;
-    private PathOption pathOption;
 
     public PathSearchingController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -26,28 +25,31 @@ public class PathSearchingController implements Controllable {
     }
 
     private void initializeControllerGuide() {
-        controllerGuide.put(Status.SELECT_PATH_OPTION, this::selectPathOption);
+        controllerGuide.put(Status.SEARCH_PATH, this::searchPath);
     }
 
 
     @Override
     public void process() {
-        Status status = Status.SELECT_PATH_OPTION;
+        Status status = Status.SEARCH_PATH;
         do {
             status = controllerGuide.get(status).get();
         } while (!status.goBack());
     }
 
-    private Status selectPathOption() {
-        pathOption = inputView.readPathOption();
-        Station departureStation = inputView.readDepartureStation();
-        Station arrivalStation = inputView.readArrivalStation();
-        validateStations(departureStation, arrivalStation);
-
-        Path optimalPath = PathRepository.getOptimalPath(pathOption, departureStation, arrivalStation);
-        outputView.printOptimalPath(optimalPath);
-
-        return Status.GO_BACK;
+    private Status searchPath() {
+        try {
+            PathOption pathOption = inputView.readPathOption();
+            Station departureStation = inputView.readDepartureStation();
+            Station arrivalStation = inputView.readArrivalStation();
+            validateStations(departureStation, arrivalStation);
+            Path optimalPath = PathRepository.getOptimalPath(pathOption, departureStation, arrivalStation);
+            outputView.printOptimalPath(optimalPath);
+            return Status.GO_BACK;
+        } catch (IllegalArgumentException exception) {
+            outputView.printExceptionMessage(exception);
+            return Status.SEARCH_PATH;
+        }
     }
 
 
@@ -58,7 +60,7 @@ public class PathSearchingController implements Controllable {
     }
 
     private enum Status {
-        SELECT_PATH_OPTION,
+        SEARCH_PATH,
         GO_BACK;
 
         public boolean goBack() {

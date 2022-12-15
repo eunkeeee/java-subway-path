@@ -18,23 +18,43 @@ public class InputView {
     }
 
     public MainOption readMainOption() {
-        System.out.println(Message.INPUT_MAIN_OPTION.message);
-        return MainOption.from(scanner.next());
+        try {
+            System.out.println(Message.INPUT_MAIN_OPTION.message);
+            return MainOption.from(scanner.next());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return readMainOption();
+        }
     }
 
     public PathOption readPathOption() {
-        System.out.println(Message.INPUT_PATH_OPTION.message);
-        return PathOption.from(scanner.next());
+        try {
+            System.out.println(Message.INPUT_PATH_OPTION.message);
+            return PathOption.from(scanner.next());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return readPathOption();
+        }
     }
 
     public Station readDepartureStation() {
-        System.out.println(Message.INPUT_DEPARTURE_STATION.message);
-        return StationRepository.getStationByName(scanner.next());
+        try {
+            System.out.println(Message.INPUT_DEPARTURE_STATION.message);
+            return StationRepository.getStationByName(scanner.next());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return readDepartureStation();
+        }
     }
 
     public Station readArrivalStation() {
-        System.out.println(Message.INPUT_ARRIVAL_STATION.message);
-        return StationRepository.getStationByName(scanner.next());
+        try {
+            System.out.println(Message.INPUT_ARRIVAL_STATION.message);
+            return StationRepository.getStationByName(scanner.next());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return readArrivalStation();
+        }
     }
 
 
