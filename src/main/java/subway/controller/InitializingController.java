@@ -74,8 +74,8 @@ public class InitializingController {
     }
 
     private static void initializePaths() {
-        StationRepository.stations().stream().forEach(PathRepository::addStation);
-        SectionRepository.sections().stream().forEach(PathRepository::addSection);
+        StationRepository.stations().forEach(PathRepository::addStation);
+        SectionRepository.sections().forEach(PathRepository::addSection);
     }
 
 }

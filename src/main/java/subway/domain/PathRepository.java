@@ -5,13 +5,11 @@ import org.jgrapht.graph.WeightedMultigraph;
 
 public class PathRepository {
 
-    private static WeightedMultigraph<String, DefaultWeightedEdge> distanceGraph;
-    private static WeightedMultigraph<String, DefaultWeightedEdge> timeGraph;
+    private static final WeightedMultigraph<String, DefaultWeightedEdge> distanceGraph = new WeightedMultigraph<>(
+            DefaultWeightedEdge.class);
+    private static final WeightedMultigraph<String, DefaultWeightedEdge> timeGraph = new WeightedMultigraph<>(
+            DefaultWeightedEdge.class);
 
-    public PathRepository() {
-        distanceGraph = new WeightedMultigraph<>(DefaultWeightedEdge.class);
-        timeGraph = new WeightedMultigraph<>(DefaultWeightedEdge.class);
-    }
 
     public static void addStation(Station station) {
         distanceGraph.addVertex(station.getName());

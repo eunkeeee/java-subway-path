@@ -1,6 +1,8 @@
 package subway.view;
 
 import java.util.Scanner;
+import subway.domain.option.MainOption;
+import subway.domain.option.PathOption;
 
 public class InputView {
     Scanner scanner = new Scanner(System.in);
@@ -13,9 +15,14 @@ public class InputView {
     private InputView() {
     }
 
-    public String readMainOption() {
+    public MainOption readMainOption() {
         System.out.println(Message.INPUT_MAIN_OPTION.message);
-        return scanner.next();
+        return MainOption.from(scanner.next());
+    }
+
+    public PathOption readPathOption() {
+        System.out.println(Message.INPUT_PATH_OPTION.message);
+        return PathOption.from(scanner.next());
     }
 
 
