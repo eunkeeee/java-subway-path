@@ -1,6 +1,8 @@
 package subway.view;
 
 import java.util.Scanner;
+import subway.domain.Station;
+import subway.domain.StationRepository;
 import subway.domain.option.MainOption;
 import subway.domain.option.PathOption;
 
@@ -23,6 +25,16 @@ public class InputView {
     public PathOption readPathOption() {
         System.out.println(Message.INPUT_PATH_OPTION.message);
         return PathOption.from(scanner.next());
+    }
+
+    public Station readDepartureStation() {
+        System.out.println(Message.INPUT_DEPARTURE_STATION.message);
+        return StationRepository.getStationByName(scanner.next());
+    }
+
+    public Station readArrivalStation() {
+        System.out.println(Message.INPUT_ARRIVAL_STATION.message);
+        return StationRepository.getStationByName(scanner.next());
     }
 
 
