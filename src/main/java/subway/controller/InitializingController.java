@@ -3,6 +3,7 @@ package subway.controller;
 import java.util.Arrays;
 import subway.domain.Line;
 import subway.domain.LineRepository;
+import subway.domain.PathRepository;
 import subway.domain.Section;
 import subway.domain.SectionRepository;
 import subway.domain.Station;
@@ -23,6 +24,7 @@ public class InitializingController {
         initializeStations();
         initializeLines();
         initializeSections();
+        initializePaths();
     }
 
     private static void initializeSections() {
@@ -71,5 +73,9 @@ public class InitializingController {
                         StationRepository.getStationByName("양재시민의숲역")));
     }
 
+    private static void initializePaths() {
+        StationRepository.stations().stream().forEach(PathRepository::addStation);
+        SectionRepository.sections().stream().forEach(PathRepository::addSection);
+    }
 
 }

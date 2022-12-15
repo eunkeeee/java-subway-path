@@ -12,4 +12,16 @@ public class Section {
         this.distance = distance;
         this.time = time;
     }
+
+    public List<Station> getStations() {
+        return stations;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public int getTime() {
+        return time;
+    }
 }
