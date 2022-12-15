@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 import subway.domain.Station;
 import subway.domain.option.PathOption;
+import subway.util.ExceptionMessage;
 import subway.view.InputView;
 import subway.view.OutputView;
 
@@ -37,11 +38,18 @@ public class PathSearchingController implements Controllable {
         PathOption pathOption = inputView.readPathOption();
         Station departureStation = inputView.readDepartureStation();
         Station arrivalStation = inputView.readArrivalStation();
+        validateStations(departureStation, arrivalStation);
 
         if (pathOption == PathOption.SHORTEST_DISTANCE) {
             return Status.GET_SHORTEST_DISTANCE_PATH;
         }
         return Status.GET_SHORTEST_TIME_PATH;
+    }
+
+    private static void validateStations(Station departureStation, Station arrivalStation) {
+        if (departureStation.equals(arrivalStation)) {
+            throw new IllegalArgumentException(ExceptionMessage.SAME_STATIONS.getMessage());
+        }
     }
 
     private enum Status {
