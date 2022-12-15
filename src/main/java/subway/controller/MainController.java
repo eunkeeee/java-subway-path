@@ -34,13 +34,18 @@ public class MainController {
     private void process(MainOption mainOption) {
         try {
             controllers.get(mainOption).process();
-        } catch (NullPointerException ignored) {
+        } catch (NullPointerException exception) {
+            outputView.printExceptionMessage(exception);
         }
     }
 
     private void initializeSubway() {
-        InitializingController initializingController = new InitializingController(inputView, outputView);
-        initializingController.process();
+        try {
+            InitializingController initializingController = new InitializingController(inputView, outputView);
+            initializingController.process();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
 }
