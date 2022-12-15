@@ -6,7 +6,7 @@ import subway.util.ExceptionMessage;
 public enum PathOption {
 
     SHORTEST_DISTANCE("1"),
-    SHORTEST_TIME("3"),
+    SHORTEST_TIME("2"),
     GO_BACK("B");
 
     private final String command;

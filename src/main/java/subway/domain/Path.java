@@ -12,4 +12,16 @@ public class Path {
         this.totalDistance = totalDistance;
         this.totalTime = totalTime;
     }
+
+    public List<String> getPath() {
+        return path;
+    }
+
+    public int getTotalDistance() {
+        return totalDistance;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
 }

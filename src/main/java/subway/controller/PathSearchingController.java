@@ -45,6 +45,7 @@ public class PathSearchingController implements Controllable {
         validateStations(departureStation, arrivalStation);
 
         Path optimalPath = PathRepository.getOptimalPath(pathOption, departureStation, arrivalStation);
+        outputView.printOptimalPath(optimalPath);
 
         return Status.GO_BACK;
     }
