@@ -34,8 +34,7 @@ public class MainController {
     private void process(MainOption mainOption) {
         try {
             controllers.get(mainOption).process();
-        } catch (NullPointerException exception) {
-            outputView.printExceptionMessage(exception);
+        } catch (NullPointerException ignored) {
         }
     }
 
